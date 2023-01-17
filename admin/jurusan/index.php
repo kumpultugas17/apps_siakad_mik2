@@ -17,6 +17,8 @@ if (!isset($_SESSION['email'])) {
    <title>Dashboard</title>
    <!-- Import Bootstrap -->
    <link rel="stylesheet" href="../../assets/css/bootstrap.css">
+   <!-- Import Icon -->
+   <link rel="stylesheet" href="../../assets/icon/bootstrap-icons.css">
    <!-- My Style -->
    <style>
       body {
@@ -56,7 +58,7 @@ if (!isset($_SESSION['email'])) {
          <div class="col-sm-12 col-md-4 col-lg-4">
             <div class="card p-3 border-0 rounded-4">
                <div class="card-body px-1">
-                  <form action="" method="post">
+                  <form action="act_create.php" method="post">
                      <div class="mb-3">
                         <label for="kode" class="form-label">Kode Jurusan</label>
                         <input type="text" class="form-control" name="kode_jurusan" id="kode" placeholder="Masukkan kode jurusan">
@@ -92,6 +94,31 @@ if (!isset($_SESSION['email'])) {
                            <th class="text-center">Aksi</th>
                         </tr>
                      </thead>
+                     <tbody>
+                        <?php
+                        require_once '../../config.php';
+                        $no = 1;
+                        $query = $conn->query("SELECT * FROM jurusan");
+                        foreach ($query as $row) :
+                        ?>
+                           <tr>
+                              <td class="text-center"><?= $no++; ?></td>
+                              <td><?= $row['kode_jurusan'] ?></td>
+                              <td><?= $row['nama_jurusan'] ?></td>
+                              <td class="text-center"><?= $row['status'] ?></td>
+                              <td class="text-center">
+                                 <button class="btn btn-sm btn-warning" data-bs-toggle="modal">
+                                    <i class="bi bi-pencil-square"></i>
+                                 </button>
+                                 <button class="btn btn-sm btn-danger">
+                                    <i class="bi bi-trash3-fill"></i>
+                                 </button>
+                              </td>
+                           </tr>
+                        <?php
+                        endforeach
+                        ?>
+                     </tbody>
                   </table>
                </div>
             </div>
