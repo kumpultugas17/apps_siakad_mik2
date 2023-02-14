@@ -19,6 +19,8 @@ if (!isset($_SESSION['email'])) {
    <link rel="stylesheet" href="../../assets/css/bootstrap.css">
    <!-- Import Icon -->
    <link rel="stylesheet" href="../../assets/icon/bootstrap-icons.css">
+   <!-- SweetAlert -->
+   <link rel="stylesheet" href="../../plugins/extensions/sweetalert2/sweetalert2.min.css">
    <!-- My Style -->
    <style>
       body {
@@ -58,7 +60,7 @@ if (!isset($_SESSION['email'])) {
          <div class="col-sm-12 col-md-4 col-lg-4">
             <div class="card p-3 border-0 rounded-4">
                <div class="card-body px-1">
-                  <form action="act_create.php" method="post">
+                  <form action="insert.php" method="post">
                      <div class="mb-3">
                         <label for="kode" class="form-label">Kode Jurusan</label>
                         <input type="text" class="form-control" name="kode_jurusan" id="kode" placeholder="Masukkan kode jurusan">
@@ -105,7 +107,7 @@ if (!isset($_SESSION['email'])) {
                               <td class="text-center"><?= $no++; ?></td>
                               <td><?= $row['kode_jurusan'] ?></td>
                               <td><?= $row['nama_jurusan'] ?></td>
-                              <td class="text-center"><?= $row['status'] ?></td>
+                              <td class="text-center"><?= $row['status_jurusan'] == 1 ? '<span class="badge text-bg-primary">Aktif</span>' : '<span class="badge text-bg-danger">Tidak Aktif</span>' ?></td>
                               <td class="text-center">
                                  <button class="btn btn-sm btn-warning" data-bs-toggle="modal">
                                     <i class="bi bi-pencil-square"></i>
@@ -128,6 +130,23 @@ if (!isset($_SESSION['email'])) {
 
    <!-- Import Bootstrap JS -->
    <script src="../../assets/js/bootstrap.bundle.js"></script>
+
+   <!-- const Toast = Swal.mixin({
+   toast: true,
+   position: 'top-end',
+   showConfirmButton: false,
+   timer: 3000,
+   timerProgressBar: true,
+   didOpen: (toast) => {
+   toast.addEventListener('mouseenter', Swal.stopTimer)
+   toast.addEventListener('mouseleave', Swal.resumeTimer)
+   }
+   })
+
+   Toast.fire({
+   icon: 'success',
+   title: 'Signed in successfully'
+   }) -->
 </body>
 
 </html>
