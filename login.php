@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (isset($_SESSION['email'])) {
+   echo "<script>
+      window.location.href='admin/index.php';
+   </script>";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 

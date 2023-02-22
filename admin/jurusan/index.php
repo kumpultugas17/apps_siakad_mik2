@@ -109,7 +109,7 @@ if (!isset($_SESSION['email'])) {
                               <td><?= $row['nama_jurusan'] ?></td>
                               <td class="text-center"><?= $row['status_jurusan'] == 1 ? '<span class="badge text-bg-primary">Aktif</span>' : '<span class="badge text-bg-danger">Tidak Aktif</span>' ?></td>
                               <td class="text-center">
-                                 <button class="btn btn-sm btn-warning" data-bs-toggle="modal">
+                                 <button type="submti" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modalEdit<?= $row['id_jur'] ?>">
                                     <i class="bi bi-pencil-square"></i>
                                  </button>
                                  <button class="btn btn-sm btn-danger">
@@ -117,6 +117,10 @@ if (!isset($_SESSION['email'])) {
                                  </button>
                               </td>
                            </tr>
+                           <!-- Modal Edit -->
+                           <div class="modal fade">
+
+                           </div>
                         <?php
                         endforeach
                         ?>
@@ -130,23 +134,30 @@ if (!isset($_SESSION['email'])) {
 
    <!-- Import Bootstrap JS -->
    <script src="../../assets/js/bootstrap.bundle.js"></script>
+   <!-- SweetAlert -->
+   <script src="../../plugins/extensions/sweetalert2/sweetalert2.all.min.js"></script>
+   <!-- Alert -->
+   <?php if (isset($_SESSION['success_insert'])) { ?>
+      <script>
+         const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+               toast.addEventListener('mouseenter', Swal.stopTimer)
+               toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+         })
 
-   <!-- const Toast = Swal.mixin({
-   toast: true,
-   position: 'top-end',
-   showConfirmButton: false,
-   timer: 3000,
-   timerProgressBar: true,
-   didOpen: (toast) => {
-   toast.addEventListener('mouseenter', Swal.stopTimer)
-   toast.addEventListener('mouseleave', Swal.resumeTimer)
-   }
-   })
-
-   Toast.fire({
-   icon: 'success',
-   title: 'Signed in successfully'
-   }) -->
+         Toast.fire({
+            icon: 'success',
+            title: '<?= $_SESSION['success_insert']; ?>'
+         })
+      </script>
+   <?php }
+   unset($_SESSION['success_insert']); ?>
 </body>
 
 </html>
